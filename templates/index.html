@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fit or Not</title>
+    <style>
+        
+        body {
+            background-color: #323232;
+            font-family: Arial, sans-serif;
+            margin: 0;         /* FIXED: Remove gap above header */
+            padding: 0;
+        }
+
+        /* --- HEADER / NAVBAR --- */
+        nav{
+            color:white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+
+            background: linear-gradient(135deg, #1f1f1f, #2c2c2c, #000);
+            box-shadow: 0 0 20px rgba(225, 225, 225, 0.2),
+                        0 4px 10px rgba(21, 21, 21, 0.6);
+
+            border-bottom: 0px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .left{
+            font-size: 1.4rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
+        }
+
+        /* ---- FORM CONTAINER ---- */
+        .form-container {
+            background-image: url('form_bg.jpg');
+            background-size: cover;
+            color: #fff;
+
+            font-weight: bold;
+            max-width: 500px;
+            margin: 40px auto;   /* FIXED: Gap between header & form */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-row label {
+            width: 40%;
+        }
+
+        .form-row input,
+        .form-row select {
+            width: 50%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container input[type="submit"] {
+            width: 100%;
+            background-color: #9f2b2b;
+            color: white;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            padding: 12px;
+            font-size: 19px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            font-size: 1.5em;
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <div class="left">Fitness Classifier by 😎24bcs022😎</div>
+        </nav>
+    </header>
+
+    <!-- FORM -->
+    <div class="form-container">
+        <form action="/predict" method="post">
+
+            <div class="form-row">
+                <label>🎂Age:</label>
+                <input type="number" name="age" min="5" max="100" required>
+            </div>
+
+            <div class="form-row">
+                <label>📏Height (cm):</label>
+                <input type="number" name="Height" min="50" max="250" required>
+            </div>
+
+            <div class="form-row">
+                <label>🏋️Weight (kg):</label>
+                <input type="number" name="weight" min="10" max="200" required>
+            </div>
+
+            <div class="form-row">
+                <label>💗Heart Rate:</label>
+                <input type="number" name="heart_rate" min="20" max="200" required>
+            </div>
+
+            <div class="form-row">
+                <label>🩺Blood Pressure:</label>
+                <input type="number" name="bp" min="60" max="200" required>
+            </div>
+
+            <div class="form-row">
+                <label>😴Sleep Hours:</label>
+                <input type="number" name="sh" min="0" max="24" required>
+            </div>
+
+            <div class="form-row">
+                <label>🥗Nutrition Quality (0-10):</label>
+                <input type="number" name="nq" min="0" max="10" required>
+            </div>
+
+            <div class="form-row">
+                <label>🏃‍♂️Activity Index (0-5):</label>
+                <input type="number" name="ai" min="0" max="5" required>
+            </div>
+
+            <div class="form-row">
+                <label>🚭Smoking Habit:</label>
+                <select name="smoke" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label>♂️♀️Gender:</label>
+                <select name="gender" required>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
